@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'MarioBrosDScopy';
+    src: url('./fonts/pixel.ttf');
+}
+
+.pixel {
+  font-family: MarioBrosDScopy;
+}
