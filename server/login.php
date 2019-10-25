@@ -3,7 +3,9 @@
   header("Access-Control-Allow-Methods: GET, POST, PUT");
   header("Access-Control-Allow-Headers: Content-Type");
 
-  $db = mysqli_connect("127.0.0.1", "login", "password", "database");
+  require_once("./config.php");
+
+  $db = mysqli_connect($config['dbHost'], $config['dbUser'], $config['dbPass'], $config['dbName']);
   if (mysqli_connect_errno()) {
     echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;
     echo "Код ошибки errno: " . mysqli_connect_errno() . PHP_EOL;
