@@ -1,6 +1,7 @@
 import React from 'react';
 import './navbar.css';
 import MD5 from '../md5';
+import IsJson from '../isJson';
 
 function onNavClick() {
   document.getElementById("nav-content").classList.toggle("hidden");
@@ -21,25 +22,7 @@ async function onTest(e) {
       body: formData
     });
     const result = await response.text();
-    console.log(result);
-  } catch (error) {
-    console.error('Ошибка:', error);
-  }
-}
-
-async function signIn(e) {
-  e.preventDefault();
-  const data = new FormData();
-  data.append('username', 'root');
-  data.append('password', MD5('WeL0veR00t'));
-
-  try {
-    const response = await fetch("http://localhost/login.php", {
-      method: 'POST',
-      body: data
-    });
-    const result = await response.json();
-    console.log(result);
+    console.log(IsJson(result));
   } catch (error) {
     console.error('Ошибка:', error);
   }
@@ -47,16 +30,53 @@ async function signIn(e) {
 
 function signUp(e) {
   e.preventDefault();
-  window.location.href = 'http://www.google.com';
 }
 
 export default class NavBar extends React.Component {
+  enableLoader = (e) => {
+    e.preventDefault();
+    this.props.updateState({loading: true});
+    setTimeout(() => {this.props.updateState({loading: false});}, 1000)
+  }
+
+  animLogin = () => {
+    this.props.updateState({loading: true});
+    setTimeout(() => {this.props.updateState({loading: false});}, 500)
+    document.getElementById('login').value = '';
+    document.getElementById('password').value = '';
+  }
+
+  signIn = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('username', document.getElementById('login').value);
+    data.append('password', MD5(document.getElementById('password').value));
+
+    try {
+      const response = await fetch("http://localhost/login.php", {
+        method: 'POST',
+        body: data
+      });
+
+      var result = await response.text();
+      if (IsJson(result)) {
+        var result = JSON.parse(result);
+        this.props.updateState({username: result.username})
+        this.props.updateState({usergroup: result.usergroup})
+        this.props.updateState({email: result.email})
+        this.animLogin();
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  }
+
   render() {
     return(<div>
       <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-1 fixed w-full">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <a className="text-white no-underline hover:text-white hover:no-underline" href="#">
-            <span className="text-2xl pl-2 pixel">Привет, Анон!</span>
+            <span className="text-2xl pl-2 pixel">Привет, {this.props.username}!</span>
           </a>
         </div>
 
@@ -77,12 +97,12 @@ export default class NavBar extends React.Component {
                   <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="password" id="password" name="password" placeholder="password" />
                 </div>
                 <div className="inline m-1">
-                  <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={signIn}>
+                  <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={this.signIn}>
                     Sign In
                   </button>
                 </div>
                 <div className="inline m-1">
-                  <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={signUp}>
+                  <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={this.enableLoader}>
                     Sign Up
                   </button>
                 </div>
