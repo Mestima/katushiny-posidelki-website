@@ -11,7 +11,7 @@ function onNavClick() {
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.token && this.props.token != '' && !this.props.authed) {
+    if (this.props.token && this.props.token != 'none' && !this.props.authed) {
       this.signInCookie();
     }
   }
@@ -25,8 +25,6 @@ class NavBar extends React.Component {
   animLogin = () => {
     this.props.updateState({loading: true});
     setTimeout(() => {this.props.updateState({loading: false});}, 500)
-//    document.getElementById('login').value = '';
-//    document.getElementById('password').value = '';
   }
 
   signOut = (e) => {
@@ -43,12 +41,14 @@ class NavBar extends React.Component {
     data.append('token', this.props.token);
 
     try {
+      this.props.updateState({loading: true});
       const response = await fetch("http://localhost/login.php", {
         method: 'POST',
         body: data
       });
 
       var result = await response.text();
+      this.props.updateState({loading: false});
       if (IsJson(result)) {
         var result = JSON.parse(result);
         this.props.updateState({
@@ -66,6 +66,7 @@ class NavBar extends React.Component {
         this.props.cookies.set('katusha-email', result.email, {path: '/', expires: d});
       }
     } catch (error) {
+      this.props.updateState({loading: false});
       console.error('Ошибка:', error);
     }
   }
