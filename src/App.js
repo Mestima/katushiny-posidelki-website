@@ -12,10 +12,11 @@ export default class App extends React.Component {
     loading: true,
     date: new Date(),
 
+    authed: false,
     username: 'Анон',
     email: '',
     usergroup: 'none'
-  }
+  };
 
   constructor() {
     super();
@@ -32,7 +33,7 @@ export default class App extends React.Component {
     return(<div>
       {this.state.loading ? <Loader /> : <div>
         <HeaderImg />
-        <NavBar username={this.state.username} updateState={this.updateState}/>
+        <NavBar username={this.state.username} authed={this.state.authed} updateState={this.updateState}/>
       </div>}
     </div>);
   }

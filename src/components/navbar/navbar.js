@@ -28,10 +28,6 @@ async function onTest(e) {
   }
 }
 
-function signUp(e) {
-  e.preventDefault();
-}
-
 export default class NavBar extends React.Component {
   enableLoader = (e) => {
     e.preventDefault();
@@ -42,8 +38,8 @@ export default class NavBar extends React.Component {
   animLogin = () => {
     this.props.updateState({loading: true});
     setTimeout(() => {this.props.updateState({loading: false});}, 500)
-    document.getElementById('login').value = '';
-    document.getElementById('password').value = '';
+//    document.getElementById('login').value = '';
+//    document.getElementById('password').value = '';
   }
 
   signIn = async (e) => {
@@ -61,9 +57,12 @@ export default class NavBar extends React.Component {
       var result = await response.text();
       if (IsJson(result)) {
         var result = JSON.parse(result);
-        this.props.updateState({username: result.username})
-        this.props.updateState({usergroup: result.usergroup})
-        this.props.updateState({email: result.email})
+        this.props.updateState({
+          username: result.username,
+          usergroup: result.usergroup,
+          email: result.email,
+          authed: true
+        })
         this.animLogin();
       }
     } catch (error) {
@@ -89,24 +88,32 @@ export default class NavBar extends React.Component {
         <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
             <li className="mr-3">
-              <form>
-                <div className="inline px-1">
-                  <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="text" id="login" name="login" placeholder="login" />
-                </div>
-                <div className="inline px-1">
-                  <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="password" id="password" name="password" placeholder="password" />
-                </div>
-                <div className="inline m-1">
-                  <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={this.signIn}>
-                    Sign In
-                  </button>
-                </div>
-                <div className="inline m-1">
-                  <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={this.enableLoader}>
-                    Sign Up
-                  </button>
-                </div>
-              </form>
+              {this.props.authed ? <div>
+                  <div className="inline m-1">
+                    <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={this.enableLoader}>
+                      Sign Up
+                    </button>
+                  </div>
+                </div> : <div>
+                  <form>
+                    <div className="inline px-1">
+                      <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="text" id="login" name="login" placeholder="login" />
+                    </div>
+                    <div className="inline px-1">
+                      <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="password" id="password" name="password" placeholder="password" />
+                    </div>
+                    <div className="inline m-1">
+                      <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={this.signIn}>
+                        Sign In
+                      </button>
+                    </div>
+                    <div className="inline m-1">
+                      <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={this.enableLoader}>
+                        Sign Up
+                      </button>
+                    </div>
+                  </form>
+                </div>}
             </li>
           </ul>
         </div>
