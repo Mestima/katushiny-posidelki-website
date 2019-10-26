@@ -2,6 +2,7 @@
   header("Access-Control-Allow-Origin: *");
   header("Access-Control-Allow-Methods: GET, POST, PUT");
   header("Access-Control-Allow-Headers: Content-Type");
+    header("Access-Control-Allow-Credentials: true");
 
   require_once("./config.php");
 
@@ -47,8 +48,13 @@
     }
 
     $password = md5(md5(md5($password_1)));
-    $query = "INSERT INTO users (name, email, password)
-    		  VALUES('$name', '$email', '$password')";
+    $token = array(
+      'name' => $name,
+      'pass' => $password
+    );
+    $token = hash('sha256', json_encode($token));
+    $query = "INSERT INTO users (name, email, password, token)
+    		  VALUES('$name', '$email', '$password', '$token')";
     mysqli_query($db, $query);
     echo "Регистрация прошла успешно!";
     exit();

@@ -2,6 +2,7 @@
   header("Access-Control-Allow-Origin: *");
   header("Access-Control-Allow-Methods: GET, POST, PUT");
   header("Access-Control-Allow-Headers: Content-Type");
+  header("Access-Control-Allow-Credentials: true");
 
   require_once("./config.php");
 
@@ -10,6 +11,27 @@
     echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;
     echo "Код ошибки errno: " . mysqli_connect_errno() . PHP_EOL;
     echo "Текст ошибки error: " . mysqli_connect_error() . PHP_EOL;
+    exit();
+  }
+
+  if (isset($_POST['token'])) {
+    $token = $_POST['token'];
+    $token_query = "SELECT * FROM users WHERE token='$token' LIMIT 1";
+    $result = mysqli_query($db, $token_query);
+    $user = mysqli_fetch_assoc($result);
+    $result->close();
+
+    if ($user) {
+      $answer = array(
+        'username' => $user['name'],
+        'email' => $user['email'],
+        'usergroup' => $user['usergroup'],
+        'token' => $token
+      );
+      echo json_encode($answer);
+    } else {
+      echo 'Неверный токен.';
+    }
     exit();
   }
 
@@ -32,7 +54,8 @@
         $answer = array(
           'username' => $user['name'],
           'email' => $user['email'],
-          'usergroup' => $user['usergroup']
+          'usergroup' => $user['usergroup'],
+          'token' => $user['token']
         );
         echo json_encode($answer);
         exit();
