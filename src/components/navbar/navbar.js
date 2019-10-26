@@ -1,4 +1,5 @@
 import React from 'react';
+import { withCookies } from 'react-cookie';
 import './navbar.css';
 import MD5 from '../md5';
 import IsJson from '../isJson';
@@ -7,28 +8,14 @@ function onNavClick() {
   document.getElementById("nav-content").classList.toggle("hidden");
 }
 
-async function onTest(e) {
-  e.preventDefault();
-
-  const formData = new FormData();
-  formData.append('username', 'root');
-  formData.append('password_1', 'WeL0veR00t');
-  formData.append('password_2', 'WeL0veR00t');
-  formData.append('email', 'none');
-
-  try {
-    const response = await fetch("http://localhost/reg.php", {
-      method: 'POST',
-      body: formData
-    });
-    const result = await response.text();
-    console.log(IsJson(result));
-  } catch (error) {
-    console.error('Ошибка:', error);
+class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    if (this.props.token && this.props.token != '' && !this.props.authed) {
+      this.signInCookie();
+    }
   }
-}
 
-export default class NavBar extends React.Component {
   enableLoader = (e) => {
     e.preventDefault();
     this.props.updateState({loading: true});
@@ -42,11 +29,18 @@ export default class NavBar extends React.Component {
 //    document.getElementById('password').value = '';
   }
 
-  signIn = async (e) => {
+  signOut = (e) => {
     e.preventDefault();
+    this.props.cookies.remove('katusha-token');
+    this.props.cookies.remove('katusha-name');
+    this.props.cookies.remove('katusha-usergroup');
+    this.props.cookies.remove('katusha-email');
+    window.location.reload();
+  }
+
+  signInCookie = async () => {
     const data = new FormData();
-    data.append('username', document.getElementById('login').value);
-    data.append('password', MD5(document.getElementById('password').value));
+    data.append('token', this.props.token);
 
     try {
       const response = await fetch("http://localhost/login.php", {
@@ -61,11 +55,54 @@ export default class NavBar extends React.Component {
           username: result.username,
           usergroup: result.usergroup,
           email: result.email,
+          token: result.token,
           authed: true
         })
-        this.animLogin();
+        let d = new Date();
+        d.setTime(d.getTime() + (1*60*1000));
+        this.props.cookies.set('katusha-token', result.token, {path: '/', expires: d});
+        this.props.cookies.set('katusha-name', result.username, {path: '/', expires: d});
+        this.props.cookies.set('katusha-usergroup', result.usergroup, {path: '/', expires: d});
+        this.props.cookies.set('katusha-email', result.email, {path: '/', expires: d});
       }
     } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  }
+
+  signIn = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append('username', document.getElementById('login').value);
+    data.append('password', MD5(document.getElementById('password').value));
+
+    try {
+      this.props.updateState({loading: true});
+      const response = await fetch("http://localhost/login.php", {
+        method: 'POST',
+        body: data
+      });
+
+      var result = await response.text();
+      this.props.updateState({loading: false});
+      if (IsJson(result)) {
+        var result = JSON.parse(result);
+        this.props.updateState({
+          username: result.username,
+          usergroup: result.usergroup,
+          email: result.email,
+          token: result.token,
+          authed: true
+        })
+        let d = new Date();
+        d.setTime(d.getTime() + (1*60*1000));
+        this.props.cookies.set('katusha-token', result.token, {path: '/', expires: d});
+        this.props.cookies.set('katusha-name', result.username, {path: '/', expires: d});
+        this.props.cookies.set('katusha-usergroup', result.usergroup, {path: '/', expires: d});
+        this.props.cookies.set('katusha-email', result.email, {path: '/', expires: d});
+      }
+    } catch (error) {
+      this.props.updateState({loading: false});
       console.error('Ошибка:', error);
     }
   }
@@ -90,8 +127,8 @@ export default class NavBar extends React.Component {
             <li className="mr-3">
               {this.props.authed ? <div>
                   <div className="inline m-1">
-                    <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={this.enableLoader}>
-                      Sign Up
+                    <button className="bg-red-500 hover:bg-red-400 text-white font-bold px-4 border-b-4 border-red-700 hover:border-red-500 rounded" onClick={this.signOut}>
+                      Sign Out
                     </button>
                   </div>
                 </div> : <div>
@@ -121,3 +158,4 @@ export default class NavBar extends React.Component {
     </div>)
   }
 }
+export default withCookies(NavBar);
