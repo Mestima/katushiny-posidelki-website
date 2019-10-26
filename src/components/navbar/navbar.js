@@ -29,10 +29,10 @@ class NavBar extends React.Component {
 
   signOut = (e) => {
     e.preventDefault();
-    this.props.cookies.remove('katusha-token');
-    this.props.cookies.remove('katusha-name');
-    this.props.cookies.remove('katusha-usergroup');
-    this.props.cookies.remove('katusha-email');
+    this.props.cookies.remove('katusha-token', {path: '/'});
+    this.props.cookies.remove('katusha-name', {path: '/'});
+    this.props.cookies.remove('katusha-usergroup', {path: '/'});
+    this.props.cookies.remove('katusha-email', {path: '/'});
     window.location.reload();
   }
 
