@@ -127,6 +127,13 @@ class NavBar extends React.Component {
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
             <li className="mr-3">
               {this.props.authed ? <div>
+                  {this.props.usergroup == 'admin' ? <>
+                    <div className="inline m-1">
+                      <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={this.enableLoader}>
+                        Admin Panel
+                      </button>
+                    </div>
+                  </> : <></>}
                   <div className="inline m-1">
                     <button className="bg-red-500 hover:bg-red-400 text-white font-bold px-4 border-b-4 border-red-700 hover:border-red-500 rounded" onClick={this.signOut}>
                       Sign Out
