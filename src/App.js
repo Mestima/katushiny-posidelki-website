@@ -1,14 +1,17 @@
+//Core Elements
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
-import Settings from './settings';
+//Styles
 import './App.css';
-import HeaderImg from './components/headerimage/headerimage';
-import NavBar from './components/navbar/navbar';
+//Working Elements
 import Loader from './components/loader/loader';
+import Settings from './settings';
+//Pages
+import IndexPage from './pages/index';
 
 document.title = Settings.title
-
 class App extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired
@@ -40,12 +43,13 @@ class App extends React.Component {
   }
 
   render() {
-    return(<div>
+    return(<Router>
       {this.state.loading ? <Loader /> : <div>
-        <HeaderImg />
-        <NavBar token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState}/>
+        <Switch>
+          <Route path='/' render={(props) => <IndexPage {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
+        </Switch>
       </div>}
-    </div>);
+    </Router>);
   }
 }
 export default withCookies(App);
