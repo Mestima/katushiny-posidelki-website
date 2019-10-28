@@ -1,6 +1,6 @@
 import React from 'react';
 import { withCookies } from 'react-cookie';
-import './navbar.css';
+import { Link } from 'react-router-dom';
 import MD5 from '../md5/';
 import IsJson from '../isJson/';
 
@@ -59,7 +59,7 @@ class NavBar extends React.Component {
           authed: true
         })
         let d = new Date();
-        d.setTime(d.getTime() + (1*60*1000));
+        d.setTime(d.getTime() + (5*60*1000));
         this.props.cookies.set('katusha-token', result.token, {path: '/', expires: d});
         this.props.cookies.set('katusha-name', result.username, {path: '/', expires: d});
         this.props.cookies.set('katusha-usergroup', result.usergroup, {path: '/', expires: d});
@@ -96,7 +96,7 @@ class NavBar extends React.Component {
           authed: true
         })
         let d = new Date();
-        d.setTime(d.getTime() + (1*60*1000));
+        d.setTime(d.getTime() + (5*60*1000));
         this.props.cookies.set('katusha-token', result.token, {path: '/', expires: d});
         this.props.cookies.set('katusha-name', result.username, {path: '/', expires: d});
         this.props.cookies.set('katusha-usergroup', result.usergroup, {path: '/', expires: d});
@@ -113,7 +113,7 @@ class NavBar extends React.Component {
       <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-1 fixed w-full">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <p className="text-white no-underline hover:text-white hover:no-underline">
-            <span className="text-2xl pl-2 pixel">Привет, {this.props.username}!</span>
+            <span className="text-2xl pl-2 pixel"><Link to="/">Привет, {this.props.username}!</Link></span>
           </p>
         </div>
 
@@ -129,11 +129,16 @@ class NavBar extends React.Component {
               {this.props.authed ? <div>
                   {this.props.usergroup == 'admin' ? <>
                     <div className="inline m-1">
-                      <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={this.enableLoader}>
-                        Admin Panel
+                      <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded">
+                        <Link to="admin">Admin Panel</Link>
                       </button>
                     </div>
                   </> : <></>}
+                  <div className="inline m-1">
+                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                      <Link to="/logo">Profile</Link>
+                    </button>
+                  </div>
                   <div className="inline m-1">
                     <button className="bg-red-500 hover:bg-red-400 text-white font-bold px-4 border-b-4 border-red-700 hover:border-red-500 rounded" onClick={this.signOut}>
                       Sign Out
