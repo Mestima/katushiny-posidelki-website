@@ -1,8 +1,8 @@
 import React from 'react';
 import { withCookies } from 'react-cookie';
 import './navbar.css';
-import MD5 from '../md5';
-import IsJson from '../isJson';
+import MD5 from '../md5/';
+import IsJson from '../isJson/';
 
 function onNavClick() {
   document.getElementById("nav-content").classList.toggle("hidden");
@@ -112,9 +112,9 @@ class NavBar extends React.Component {
     return(<div>
       <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-1 fixed w-full">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <a className="text-white no-underline hover:text-white hover:no-underline" href="#">
+          <p className="text-white no-underline hover:text-white hover:no-underline">
             <span className="text-2xl pl-2 pixel">Привет, {this.props.username}!</span>
-          </a>
+          </p>
         </div>
 
         <div className="block lg:hidden">

@@ -1,6 +1,6 @@
 import React from 'react';
-import HeaderImg from '../components/headerimage/headerimage';
-import NavBar from '../components/navbar/navbar';
+import HeaderImg from '../components/headerimage/';
+import NavBar from '../components/navbar/';
 
 export default class IndexPage extends React.Component {
   render() {
