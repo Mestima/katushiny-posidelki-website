@@ -111,7 +111,7 @@ class NavBar extends React.Component {
 
   render() {
     return(<div>
-      <nav className="flex items-center justify-betwee flex-wrap bg-gray-800 p-1 w-full">
+      <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-1 w-full">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <p className="text-white no-underline hover:text-white hover:no-underline">
             <span className="text-2xl pl-2 pixel"><Link to="/">Привет, {this.props.username}!</Link></span>
