@@ -9,7 +9,7 @@ import './App.css';
 import Loader from './components/loader/loader';
 import Settings from './settings';
 //Pages
-import IndexPage from './pages/index';
+import Pages from './pages/';
 
 document.title = Settings.title
 class App extends React.Component {
@@ -46,7 +46,7 @@ class App extends React.Component {
     return(<Router>
       {this.state.loading ? <Loader /> : <div>
         <Switch>
-          <Route path='/' render={(props) => <IndexPage {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
+          <Route path='/' render={(props) => <Pages.main {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
         </Switch>
       </div>}
     </Router>);
