@@ -5,13 +5,14 @@ import Change from '../components/buttons/change';
 
 const needMainPBtn = true;
 const needProfiBtn = true;
+const needInvenBtn = true;
 export default class IndexPage extends React.Component {
   render() {
     return(<>
       {this.props.usergroup != 'admin' ? <>
         <Redirect to='/' />
       </> : <>
-        <NavBar token={this.props.token} username={this.props.username} authed={this.props.authed} updateState={this.props.updateState} usergroup={this.props.usergroup} needProfiBtn={needProfiBtn} needMainPBtn={needMainPBtn} />
+        <NavBar token={this.props.token} username={this.props.username} authed={this.props.authed} updateState={this.props.updateState} usergroup={this.props.usergroup} needProfiBtn={needProfiBtn} needMainPBtn={needMainPBtn} needInvenBtn={needInvenBtn} />
         <br />
         <form class="max-w-sm mx-auto">
         <div class="md:flex md:items-center mb-6 pixel">
