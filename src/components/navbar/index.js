@@ -111,7 +111,7 @@ class NavBar extends React.Component {
 
   render() {
     return(<div>
-      <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-1 fixed w-full">
+      <nav className="flex items-center justify-betwee flex-wrap bg-gray-800 p-1 w-full">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <p className="text-white no-underline hover:text-white hover:no-underline">
             <span className="text-2xl pl-2 pixel"><Link to="/">Привет, {this.props.username}!</Link></span>
@@ -127,7 +127,7 @@ class NavBar extends React.Component {
         <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
             <li className="mr-3">
-              {this.props.authed ? <div>
+              {this.props.authed ? <>
                   {this.props.usergroup == 'admin' && this.props.needAdminBtn ? <>
                       <Buttons.admin />
                   </>:<></>
@@ -141,7 +141,7 @@ class NavBar extends React.Component {
                   :<></>
                   }
                   <Buttons.signOut signOut={this.signOut} />
-                </div> : <div>
+                </>:<>
                   <form>
                     <div className="inline px-1">
                       <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="text" id="login" name="login" placeholder="login" />
@@ -152,7 +152,7 @@ class NavBar extends React.Component {
                     <Buttons.signIn signIn={this.signIn} />
                     <Buttons.signUp signUp={this.enableLoader} />
                   </form>
-                </div>}
+                </>}
             </li>
           </ul>
         </div>
