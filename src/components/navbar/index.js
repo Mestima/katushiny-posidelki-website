@@ -3,6 +3,7 @@ import { withCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import MD5 from '../md5/';
 import IsJson from '../isJson/';
+import Buttons from '../buttons/';
 
 function onNavClick() {
   document.getElementById("nav-content").classList.toggle("hidden");
@@ -127,23 +128,19 @@ class NavBar extends React.Component {
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
             <li className="mr-3">
               {this.props.authed ? <div>
-                  {this.props.usergroup == 'admin' ? <>
-                    <div className="inline m-1">
-                      <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded">
-                        <Link to="admin">Admin Panel</Link>
-                      </button>
-                    </div>
-                  </> : <></>}
-                  <div className="inline m-1">
-                    <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                      <Link to="/logo">Profile</Link>
-                    </button>
-                  </div>
-                  <div className="inline m-1">
-                    <button className="bg-red-500 hover:bg-red-400 text-white font-bold px-4 border-b-4 border-red-700 hover:border-red-500 rounded" onClick={this.signOut}>
-                      Sign Out
-                    </button>
-                  </div>
+                  {this.props.usergroup == 'admin' && this.props.needAdminBtn ? <>
+                      <Buttons.admin />
+                  </>:<></>
+                  }
+                  {this.props.needMainPBtn ?
+                      <Buttons.mainPage />
+                  :<></>
+                  }
+                  {this.props.needProfiBtn ?
+                      <Buttons.profile />
+                  :<></>
+                  }
+                  <Buttons.signOut signOut={this.signOut} />
                 </div> : <div>
                   <form>
                     <div className="inline px-1">
@@ -152,16 +149,8 @@ class NavBar extends React.Component {
                     <div className="inline px-1">
                       <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="password" id="password" name="password" placeholder="password" />
                     </div>
-                    <div className="inline m-1">
-                      <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={this.signIn}>
-                        Sign In
-                      </button>
-                    </div>
-                    <div className="inline m-1">
-                      <button className="bg-green-500 hover:bg-green-400 text-white font-bold px-4 border-b-4 border-green-700 hover:border-green-500 rounded" onClick={this.enableLoader}>
-                        Sign Up
-                      </button>
-                    </div>
+                    <Buttons.signIn signIn={this.signIn} />
+                    <Buttons.signUp signUp={this.enableLoader} />
                   </form>
                 </div>}
             </li>
