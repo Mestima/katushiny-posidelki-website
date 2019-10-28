@@ -10,6 +10,7 @@ import Loader from './components/loader/loader';
 import Settings from './settings';
 //Pages
 import Pages from './pages/';
+import HeadImg from './components/headerimage/';
 
 document.title = Settings.title
 class App extends React.Component {
@@ -34,7 +35,7 @@ class App extends React.Component {
 
   updateCookie = (name, data) => {
     let d = new Date();
-    d.setTime(d.getTime() + (1*60*1000));
+    d.setTime(d.getTime() + (5*60*1000));
     this.cookies.set('katusha-token', data, {path: '/', expires: d});
   }
 
@@ -46,6 +47,8 @@ class App extends React.Component {
     return(<Router>
       {this.state.loading ? <Loader /> : <div>
         <Switch>
+          <Route path='/admin' render={(props) => <Pages.admin {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
+          <Route path='/profile' render={(props) => <Pages.profile {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
           <Route path='/' render={(props) => <Pages.main {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
         </Switch>
       </div>}
