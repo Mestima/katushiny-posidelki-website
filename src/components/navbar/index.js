@@ -128,18 +128,10 @@ class NavBar extends React.Component {
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
             <li className="mr-3">
               {this.props.authed ? <>
-                  {this.props.usergroup == 'admin' && this.props.needAdminBtn ? <>
-                      <Buttons.admin />
-                  </>:<></>
-                  }
-                  {this.props.needMainPBtn ?
-                      <Buttons.mainPage />
-                  :<></>
-                  }
-                  {this.props.needProfiBtn ?
-                      <Buttons.profile />
-                  :<></>
-                  }
+                  <Buttons.admin usergroup={this.props.usergroup} needAdminBtn={this.props.needAdminBtn} />
+                  <Buttons.inventory needInvenBtn={this.props.needInvenBtn} />
+                  <Buttons.profile needProfiBtn={this.props.needProfiBtn} />
+                  <Buttons.mainPage needMainPBtn={this.props.needMainPBtn} />
                   <Buttons.signOut signOut={this.signOut} />
                 </>:<>
                   <form>
