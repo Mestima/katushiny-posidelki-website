@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderImg from '../components/headerimage/';
 import NavBar from '../components/navbar/';
-import Content from '../components/maincontent/'
+import Content from '../components/concontent/'
 
 const needInvenBtn = true;
 const needAdminBtn = true;
