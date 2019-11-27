@@ -6,6 +6,7 @@ import MainPage from './mainPage';
 import Profile from './profile';
 import Change from './change';
 import Inventory from './inventory';
+import Buy from './buy';
 
 export default {
   admin: Admin,
@@ -15,5 +16,6 @@ export default {
   mainPage: MainPage,
   profile: Profile,
   change: Change,
-  inventory: Inventory
+  inventory: Inventory,
+  buy: Buy
 }
