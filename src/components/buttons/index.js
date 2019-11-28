@@ -7,10 +7,12 @@ import Profile from './profile';
 import Change from './change';
 import Inventory from './inventory';
 import Buy from './buy';
+import GoSignUp from './goSignUp';
 
 export default {
   admin: Admin,
   signUp: SignUp,
+  goSignUp: GoSignUp,
   signIn: SignIn,
   signOut: SignOut,
   mainPage: MainPage,
