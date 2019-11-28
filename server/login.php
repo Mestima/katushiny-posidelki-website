@@ -14,6 +14,8 @@
     exit();
   }
 
+  mysqli_set_charset($db, "utf8");
+
   if (isset($_POST['token'])) {
     $token = $_POST['token'];
     $token_query = "SELECT * FROM users WHERE token='$token' LIMIT 1";
