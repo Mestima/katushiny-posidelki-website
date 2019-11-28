@@ -142,7 +142,7 @@ class NavBar extends React.Component {
                       <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="password" id="password" name="password" placeholder="password" />
                     </div>
                     <Buttons.signIn signIn={this.signIn} />
-                    <Buttons.signUp signUp={this.enableLoader} />
+                    <Buttons.signUp />
                   </form>
                 </>}
             </li>
