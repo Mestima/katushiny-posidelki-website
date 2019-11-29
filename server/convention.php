@@ -42,10 +42,11 @@
       'starts' => $row[2],
       'ends' => $row[3],
       'description' => $row[4],
-      'visitors' => $row[5]
+      'visitors' => $row[5],
+      'maxvisitors' => $row[6]
     );
     mysqli_free_result($result);
-    
+
     echo json_encode($answer);
     $db->close();
     exit();
