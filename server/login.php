@@ -52,7 +52,7 @@
     $result->close();
 
     if ($user) {
-      if ($user['password'] === md5(md5($password))) {
+      if ($user['pass'] === md5(md5($password))) {
         $answer = array(
           'username' => $user['name'],
           'email' => $user['email'],
