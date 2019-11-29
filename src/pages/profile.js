@@ -20,7 +20,10 @@ export default class IndexPage extends React.Component {
             Статус Вашего аккаунта: {this.props.usergroup}
           </div>
           <br />
-          <div className="flex-auto text-black text-center px-4 py-2 m-2">
+          <div className="flex-auto text-black text-center px-4 py-2 m-2 pixel">
+            Данная страница еще в разработке :3 <br />
+            Если возникли проблемы, пиши сюда: mestima@icloud.com
+          {/* Убери pixel из div'a выше!
             <form className="max-w-sm mx-auto">
             <div className="md:flex md:items-center mb-6 pixel">
               <div className="md:w-1/3">
@@ -49,6 +52,7 @@ export default class IndexPage extends React.Component {
                 </div>
               </div>
             </form>
+            */}
           </div>
         </div>
       </>}
