@@ -52,6 +52,7 @@ class App extends React.Component {
           <Route path='/inventory' render={(props) => <Pages.inventory {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
           <Route path='/convention' render={(props) => <Pages.convention {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
           <Route path='/reg' render={(props) => <Pages.registration {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
+          <Route path='/say' render={(props) => <Pages.say {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
           <Route path='/' render={(props) => <Pages.main {...props} token={this.state.token} username={this.state.username} authed={this.state.authed} updateState={this.updateState} usergroup={this.state.usergroup} />} />
         </Switch>
       </div>}

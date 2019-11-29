@@ -4,6 +4,7 @@ import Profile from './profile';
 import Inv from './inv';
 import Con from './convention';
 import Reg from './reg';
+import Say from './say';
 
 export default {
   main: Main,
@@ -11,5 +12,6 @@ export default {
   profile: Profile,
   inventory: Inv,
   convention: Con,
-  registration: Reg
+  registration: Reg,
+  say: Say
 }
