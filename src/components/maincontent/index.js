@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import API from '../api/';
 
 export default class MainContent extends React.Component {
   render() {
     return <>
+      <Redirect to='/convention' /> {/* не забудь убрать редиррект! */}
       <br />
       <Link to="/convention">
         <div className="flex justify-center">
