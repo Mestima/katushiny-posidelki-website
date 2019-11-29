@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import API from '../api/';
 import Donate from '../donate/';
 import Buy from '../buttons/buy';
 import IsJson from '../isJson/';
@@ -27,7 +28,7 @@ export default class ConContent extends React.Component {
   loadData = async () => {
     try {
       this.setState({loading: true});
-      const response = await fetch("http://nilored.ru/convention.php", {
+      const response = await fetch(API.convention, {
         method: 'POST',
         body: this.state.data
       });

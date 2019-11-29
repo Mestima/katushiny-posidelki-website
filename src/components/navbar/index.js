@@ -1,6 +1,7 @@
 import React from 'react';
 import { withCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
+import API from '../api/';
 import MD5 from '../md5/';
 import IsJson from '../isJson/';
 import Buttons from '../buttons/';
@@ -12,6 +13,7 @@ function onNavClick() {
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
+
     if (this.props.token && this.props.token != 'none' && !this.props.authed) {
       this.signInCookie();
     }
@@ -43,7 +45,7 @@ class NavBar extends React.Component {
 
     try {
       this.props.updateState({loading: true});
-      const response = await fetch("http://localhost/login.php", {
+      const response = await fetch(API.login, {
         method: 'POST',
         body: data
       });
@@ -80,7 +82,7 @@ class NavBar extends React.Component {
 
     try {
       this.props.updateState({loading: true});
-      const response = await fetch("http://localhost/login.php", {
+      const response = await fetch(API.login, {
         method: 'POST',
         body: data
       });
@@ -102,9 +104,13 @@ class NavBar extends React.Component {
         this.props.cookies.set('katusha-name', result.username, {path: '/', expires: d});
         this.props.cookies.set('katusha-usergroup', result.usergroup, {path: '/', expires: d});
         this.props.cookies.set('katusha-email', result.email, {path: '/', expires: d});
+      } else {
+        alert(result);
+        console.log(result);
       }
     } catch (error) {
       this.props.updateState({loading: false});
+      alert('Ошибка:'+error);
       console.error('Ошибка:', error);
     }
   }

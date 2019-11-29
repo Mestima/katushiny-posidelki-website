@@ -25,7 +25,7 @@
     //добавить проверку капчи
 
     if (empty($name)) { echo "Необходимо ввести имя пользователя!"; exit(); }
-    if (empty($email)) { echo "Необходимо ввести email!"; exit(); }
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) { echo "Необходимо ввести email!"; exit(); }
     if (empty($password_1)) { echo "Необходимо ввести пароль!"; exit(); }
     if ($password_1 != $password_2) {
   	   echo "Введенные пароли не совпадают.";
@@ -55,7 +55,7 @@
       'pass' => $password
     );
     $token = hash('sha256', json_encode($token));
-    $query = "INSERT INTO users (name, email, password, token)
+    $query = "INSERT INTO users (name, email, pass, token)
     		  VALUES('$name', '$email', '$password', '$token')";
     mysqli_query($db, $query);
     echo "Регистрация прошла успешно!";
