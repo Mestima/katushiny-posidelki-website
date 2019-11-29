@@ -6,7 +6,7 @@ import Buy from '../buttons/buy';
 import IsJson from '../isJson/';
 import LocalLoader from '../loader/loader';
 
-const convention = "test_con";
+const convention = "Twilight Time: Friendship is Knowledge";
 
 export default class ConContent extends React.Component {
 
@@ -47,14 +47,21 @@ export default class ConContent extends React.Component {
   createTable = () => {
     let table = [];
     let flag = false;
+    let colored = true;
+    let style = 'border px-4 py-2';
     for (let k of Object.keys(this.state.result)) {
       if (flag == true) {
         let v = this.state.result[k];
+        let clr = '';
+        if (!colored) { clr = 'bg-gray-100'; }
+        colored = !colored;
         table.push(
-          <tr><td class='border px-4 py-2'>{v['name']}</td>
-          <td class='border px-4 py-2'>{v['description']}</td>
-          <td class='border px-4 py-2'>{v['cost']}</td>
-          <td class='border px-4 py-2'><Buy link={v['link']} /></td></tr>
+          <tr class={clr}>
+            <td class={style}>{v['name']}</td>
+            <td class={style}>{v['description']}</td>
+            <td class={style}>{v['cost']}</td>
+            <td class={style}><Buy link={v['link']} /></td>
+          </tr>
         );
       }
       flag = true;
@@ -67,11 +74,11 @@ export default class ConContent extends React.Component {
     for (let k of Object.keys(this.state.result)) {
       let v = this.state.result[k];
       table.push(<div class='text-center'>
-        <div class='text-5xl'>{v['name']}</div>
-        <div class='text-3xl'>{v['description']}</div>
+        <div class='text-5xl font-serif'>{v['name']}</div>
+        <div class='text-3xl font-serif'>{v['description']}</div>
         <div class='text-base'>Дата начала мероприятия: {v['starts']}</div>
         <div class='text-base'>Дата окончания мероприятия: {v['ends']}</div>
-        <div class='pixel'>Уже куплено билетов: {v['visitors']}</div>
+        <div class='text-base font-bold'>Уже куплено билетов: {v['visitors']}/{v['maxvisitors'] == '0' ? '∞' : v['maxvisitors']}</div>
       </div>);
       break;
     }
