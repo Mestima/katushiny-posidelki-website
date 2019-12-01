@@ -1,13 +1,15 @@
 let protocol = 'http://';
-let name = 'nilored.ru';
+let name = 'katusha-events.ru';
 let inventory = 'inv.';
 
 let dname = protocol+name;
 let aname = protocol+inventory+name;
 export default {
-  login: dname+'/login.php',
-  reg: dname+'/reg.php',
-  convention: dname+'/convention.php',
-  mainpage: dname+'/mainpage.php',
-  inventory: aname+'?token='
+  login: dname+'/server/login.php',
+  reg: dname+'/server/reg.php',
+  convention: dname+'/server/convention.php',
+  mainpage: dname+'/server/mainpage.php',
+  inventory: aname+'?token=',
+  neworder: dname+'/server/order.php',
+  self: dname
 }
