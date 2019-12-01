@@ -36,7 +36,7 @@ class NavBar extends React.Component {
     this.props.cookies.remove('katusha-name', {path: '/'});
     this.props.cookies.remove('katusha-usergroup', {path: '/'});
     this.props.cookies.remove('katusha-email', {path: '/'});
-    window.location.reload();
+    window.location.replace(API.self);
   }
 
   signInCookie = async () => {
@@ -62,7 +62,7 @@ class NavBar extends React.Component {
           authed: true
         })
         let d = new Date();
-        d.setTime(d.getTime() + (5*60*1000));
+        d.setTime(d.getTime() + (1337228*60*1000));
         this.props.cookies.set('katusha-token', result.token, {path: '/', expires: d});
         this.props.cookies.set('katusha-name', result.username, {path: '/', expires: d});
         this.props.cookies.set('katusha-usergroup', result.usergroup, {path: '/', expires: d});
@@ -99,7 +99,7 @@ class NavBar extends React.Component {
           authed: true
         })
         let d = new Date();
-        d.setTime(d.getTime() + (5*60*1000));
+        d.setTime(d.getTime() + (1337228*60*1000));
         this.props.cookies.set('katusha-token', result.token, {path: '/', expires: d});
         this.props.cookies.set('katusha-name', result.username, {path: '/', expires: d});
         this.props.cookies.set('katusha-usergroup', result.usergroup, {path: '/', expires: d});
