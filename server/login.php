@@ -17,7 +17,7 @@
   mysqli_set_charset($db, "utf8");
 
   if (isset($_POST['token'])) {
-    $token = $_POST['token'];
+    $token = mysqli_real_escape_string($db, $_POST['token']);
     $token_query = "SELECT * FROM users WHERE token='$token' LIMIT 1";
     $result = mysqli_query($db, $token_query);
     $user = mysqli_fetch_assoc($result);
