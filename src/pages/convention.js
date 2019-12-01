@@ -11,7 +11,7 @@ export default class IndexPage extends React.Component {
     return(<>
       <HeaderImg />
       <NavBar token={this.props.token} username={this.props.username} authed={this.props.authed} updateState={this.props.updateState} usergroup={this.props.usergroup} needAdminBtn={needAdminBtn} needProfiBtn={needProfiBtn} needInvenBtn={needInvenBtn} />
-      <Content />
+      <Content token={this.props.token} />
     </>)
   }
 }
