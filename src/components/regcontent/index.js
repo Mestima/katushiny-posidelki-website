@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 import API from '../api/';
 import Reg from '../buttons/goSignUp';
 import LocalLoader from '../loader/loader';
@@ -11,8 +12,13 @@ export default class RegContent extends React.Component {
 
     this.state = {
       loading: false,
+      captcha: '',
       answer: ''
     }
+  }
+
+  onCaptcha = (val) => {
+    this.setState({captcha: val});
   }
 
   goReg = async (e) => {
@@ -22,6 +28,7 @@ export default class RegContent extends React.Component {
     data.append('email', document.getElementById('email').value);
     data.append('password_1', document.getElementById('password_1').value);
     data.append('password_2', document.getElementById('password_2').value);
+    data.append('g-recaptcha-response', this.state.captcha);
 
     try {
       this.setState({loading: true});
@@ -95,6 +102,19 @@ export default class RegContent extends React.Component {
             </div>
             <div className="md:w-2/3">
               <input className="bg-gray-600 appearance-none border-2 border-gray-200 text-black rounded-full w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 pixel" id="password_2" type="password" />
+            </div>
+          </div>
+          <div className="md:flex md:items-center mb-6 pixel">
+            <div className="md:w-1/3">
+              <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
+                Поставьте галочку
+              </label>
+            </div>
+            <div className="md:w-2/3">
+              <ReCAPTCHA
+                sitekey="6LeUfcUUAAAAAN9byFDlaNRZS31N3gSTUSptVvDz"
+                onChange={this.onCaptcha}
+              />
             </div>
           </div>
           <div className="md:flex md:items-center">

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import ReCAPTCHA from 'react-google-recaptcha';
 import API from '../api/';
 import Donate from '../donate/';
 import Buy from '../buttons/buy';
@@ -15,6 +15,7 @@ export default class ConContent extends React.Component {
 
     this.state = {
       data: new FormData(),
+      captcha: '',
       result: [],
       loading: false
     }
@@ -23,6 +24,10 @@ export default class ConContent extends React.Component {
 
   componentDidMount() {
     this.loadData();
+  }
+
+  onCaptcha = (val) => {
+    this.setState({captcha: val});
   }
 
   loadData = async () => {
@@ -60,7 +65,7 @@ export default class ConContent extends React.Component {
             <td class={style}>{v['name']}</td>
             <td class={style}>{v['description']}</td>
             <td class={style}>{v['cost']}</td>
-            <td class={style}><Buy link={v['link']} /></td>
+            <td class={style}><Buy link={API.neworder+'?token='+this.props.token+'&item='+v['name']+'&g-recaptcha-response='+this.state.captcha} /></td>
           </tr>
         );
       }
@@ -93,6 +98,15 @@ export default class ConContent extends React.Component {
       </div>
       <div className="flex justify-center text-4xl font-bold">
         Билеты
+      </div>
+      <div className="flex justify-center text-base text-red-400 font-bold">
+        Ваш билет появится в инвентаре Вашего аккаунта
+      </div>
+      <div className="flex justify-center text-4xl font-bold">
+        <ReCAPTCHA
+          sitekey="6LeUfcUUAAAAAN9byFDlaNRZS31N3gSTUSptVvDz"
+          onChange={this.onCaptcha}
+        />
       </div>
       <div className="flex justify-center container mb-4">
         <table className="table-auto">
