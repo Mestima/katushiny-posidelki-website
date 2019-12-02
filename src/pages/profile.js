@@ -16,8 +16,13 @@ export default class IndexPage extends React.Component {
         <HeaderImg />
         <NavBar token={this.props.token} username={this.props.username} authed={this.props.authed} updateState={this.props.updateState} usergroup={this.props.usergroup} needAdminBtn={needAdminBtn} needMainPBtn={needMainPBtn} needInvenBtn={needInvenBtn} />
         <div className="container mx-auto justify-start">
-          <div className="flex-auto text-black text-center bg-gray-400 px-4 py-2 m-2 rounded-full pixel">
-            Статус Вашего аккаунта: {this.props.usergroup}
+          <div class="card">
+            <div class="card-header pixel text-center">
+              Статус Вашего аккаунта
+            </div>
+            <div class="card-body pixel text-center">
+              {this.props.usergroup}
+            </div>
           </div>
           <br />
           <div className="text-center">
