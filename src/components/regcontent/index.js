@@ -60,70 +60,47 @@ export default class RegContent extends React.Component {
       { this.state.answer != '' && <Redirect to={{pathname: '/say', text: this.state.answer}} /> }
       {this.state.loading ? <LocalLoader /> : <>
       <br />
-      <div className="flex-auto text-black text-center px-4 py-2 m-2">
-        <div className="text-3xl mb-2 pixel">Регистрация</div>
-        <div className="text-base mb-10 pixel">Используйте только английские буквы для логина!</div>
-        <form className="max-w-sm mx-auto">
-        <div className="md:flex md:items-center mb-6 pixel">
-          <div className="md:w-1/3">
-            <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
-              Введите логин
-            </label>
+      <div className="container">
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-default">Логин</span>
           </div>
-          <div className="md:w-2/3">
-            <input className="bg-gray-600 appearance-none border-2 border-gray-200 text-black rounded-full w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 pixel" id="name" type="text" />
-          </div>
+          <input type="text" className="form-control" id="name" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
         </div>
-        <div className="md:flex md:items-center mb-6 pixel">
-          <div className="md:w-1/3">
-            <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
-              Введите email
-            </label>
+
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-default">email</span>
           </div>
-          <div className="md:w-2/3">
-            <input className="bg-gray-600 appearance-none border-2 border-gray-200 text-black rounded-full w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 pixel" id="email" type="text" />
-          </div>
+          <input type="text" className="form-control" id="email" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
         </div>
-        <div className="md:flex md:items-center mb-6 pixel">
-          <div className="md:w-1/3">
-            <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
-              Введите пароль
-            </label>
+
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-default">Пароль</span>
           </div>
-          <div className="md:w-2/3">
-            <input className="bg-gray-600 appearance-none border-2 border-gray-200 text-black rounded-full w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 pixel" id="password_1" type="password" />
-          </div>
+          <input type="text" className="form-control" id="password_1" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
         </div>
-          <div className="md:flex md:items-center mb-6 pixel">
-            <div className="md:w-1/3">
-              <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
-                Повторите пароль
-              </label>
-            </div>
-            <div className="md:w-2/3">
-              <input className="bg-gray-600 appearance-none border-2 border-gray-200 text-black rounded-full w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 pixel" id="password_2" type="password" />
-            </div>
+
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-default">Повторите пароль</span>
           </div>
-          <div className="md:flex md:items-center mb-6 pixel">
-            <div className="md:w-1/3">
-              <label className="block font-bold md:text-right mb-1 md:mb-0 pr-4">
-                Поставьте галочку
-              </label>
-            </div>
-            <div className="md:w-2/3">
-              <ReCAPTCHA
-                sitekey="6LeUfcUUAAAAAN9byFDlaNRZS31N3gSTUSptVvDz"
-                onChange={this.onCaptcha}
-              />
-            </div>
+          <input type="text" className="form-control" id="password_2" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
+        </div>
+
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-default">Поставьте галочку</span>
           </div>
-          <div className="md:flex md:items-center">
-            <div className="md:w-1/3"></div>
-            <div className="md:w-2/3">
-              <Reg reg={this.goReg} />
-            </div>
-          </div>
-        </form>
+          <ReCAPTCHA
+            sitekey="6LeUfcUUAAAAAN9byFDlaNRZS31N3gSTUSptVvDz"
+            onChange={this.onCaptcha}
+          />
+        </div>
+        <div className="center mb-5">
+          <Reg reg={this.goReg} />
+        </div>
       </div>
       </>}</> }
     </>
