@@ -117,44 +117,53 @@ class NavBar extends React.Component {
 
   render() {
     return(<div>
-      <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-1 w-full">
-        <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <p className="text-white no-underline hover:text-white hover:no-underline">
-            <span className="text-2xl pl-2 pixel"><Link to="/">Привет, {this.props.username}!</Link></span>
-          </p>
-        </div>
 
-        <div className="block lg:hidden">
-          <button id="nav-toggle" className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white" onClick={onNavClick}>
-            <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-          </button>
-        </div>
+      <div className="container">
+          <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+          {/*
+              <button className="navbar-toggler" type="button" data-toggle="collapse"
+                          data-target="#collapse_Navbar">
+                  <span className="navbar-toggler-icon"></span>
+              </button>
+          */}
 
-        <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
-          <ul className="list-reset lg:flex justify-end flex-1 items-center">
-            <li className="mr-3">
-              {this.props.authed ? <>
+              <div className="collapse navbar-collapse" id="collapse_Navbar">
+                  <span className="text-white pixel">Привет, Анон!</span>
+              </div>
+              {this.props.authed ?
+                <>
                   <Buttons.admin usergroup={this.props.usergroup} needAdminBtn={this.props.needAdminBtn} />
                   <Buttons.inventory needInvenBtn={this.props.needInvenBtn} />
                   <Buttons.profile needProfiBtn={this.props.needProfiBtn} />
                   <Buttons.mainPage needMainPBtn={this.props.needMainPBtn} />
                   <Buttons.signOut signOut={this.signOut} />
-                </>:<>
-                  <form>
-                    <div className="inline px-1">
-                      <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="text" id="login" name="login" placeholder="login" />
-                    </div>
-                    <div className="inline px-1">
-                      <input className="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pixel" type="password" id="password" name="password" placeholder="password" />
-                    </div>
-                    <Buttons.signIn signIn={this.signIn} />
-                    <Buttons.signUp />
+                </> :
+                <>
+                  <form className="form-inline" action="#">
+                      <div className="input-group m-1">
+                          <div className="input-group-prepend">
+                              <span className="input-group-text pixel">L</span>
+                          </div>
+                          <input type="text" className="form-control" placeholder="login" />
+                      </div>
+                      <div className="input-group m-1">
+                          <div className="input-group-prepend">
+                              <span className="input-group-text pixel">P</span>
+                          </div>
+                          <input type="text" className="form-control" placeholder="password" />
+                      </div>
+                      <div className="input-group">
+                        <Buttons.signIn signIn={this.signIn} />
+                      </div>
+                      <div className="input-group">
+                        <Buttons.signUp />
+                      </div>
                   </form>
-                </>}
-            </li>
-          </ul>
-        </div>
-      </nav>
+                </>
+              }
+          </nav>
+      </div>
+
     </div>)
   }
 }

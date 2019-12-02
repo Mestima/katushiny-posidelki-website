@@ -52,20 +52,15 @@ export default class ConContent extends React.Component {
   createTable = () => {
     let table = [];
     let flag = false;
-    let colored = true;
-    let style = 'border px-4 py-2';
     for (let k of Object.keys(this.state.result)) {
       if (flag == true) {
         let v = this.state.result[k];
-        let clr = '';
-        if (!colored) { clr = 'bg-gray-100'; }
-        colored = !colored;
         table.push(
-          <tr class={clr}>
-            <td class={style}>{v['name']}</td>
-            <td class={style}>{v['description']}</td>
-            <td class={style}>{v['cost']}</td>
-            <td class={style}><Buy link={API.neworder+'?token='+this.props.token+'&item='+v['name']+'&g-recaptcha-response='+this.state.captcha} /></td>
+          <tr>
+            <td>{v['name']}</td>
+            <td>{v['description']}</td>
+            <td>{v['cost']}</td>
+            <td><Buy link={API.neworder+'?token='+this.props.token+'&item='+v['name']+'&g-recaptcha-response='+this.state.captcha} /></td>
           </tr>
         );
       }
@@ -79,11 +74,11 @@ export default class ConContent extends React.Component {
     for (let k of Object.keys(this.state.result)) {
       let v = this.state.result[k];
       table.push(<div class='text-center'>
-        <div class='text-5xl font-serif'>{v['name']}</div>
-        <div class='text-3xl font-serif'>{v['description']}</div>
-        <div class='text-base'>Дата начала мероприятия: {v['starts']}</div>
-        <div class='text-base'>Дата окончания мероприятия: {v['ends']}</div>
-        <div class='text-base font-bold'>Уже куплено билетов: {v['visitors']}/{v['maxvisitors'] == '0' ? '∞' : v['maxvisitors']}</div>
+        <div class='display-3 font-weight-bold'>{v['name']}</div>
+        <div><h3>{v['description']}</h3></div>
+        <div>Дата начала мероприятия: {v['starts']}</div>
+        <div>Дата окончания мероприятия: {v['ends']}</div>
+        <div><b>Уже куплено билетов: {v['visitors']}/{v['maxvisitors'] == '0' ? '∞' : v['maxvisitors']}</b></div>
       </div>);
       break;
     }
@@ -91,31 +86,32 @@ export default class ConContent extends React.Component {
   }
 
   render() {
-    return <>
+    return <div className="container">
       {this.state.loading ? <LocalLoader /> : <>
-      <div className="flex justify-center mt-4 mb-4">
+      <div className="text-center">
         {this.createInfo()}
       </div>
-      <div className="flex justify-center text-4xl font-bold">
+      <div className="text-center display-3 font-weight-bold">
         Билеты
       </div>
-      <div className="flex justify-center text-base text-red-400 font-bold">
-        Ваш билет появится в инвентаре Вашего аккаунта
+      <div className="text-center text-danger">
+        <h4>Ваш билет появится в инвентаре Вашего аккаунта</h4>
       </div>
-      <div className="flex justify-center text-4xl font-bold">
+      <div>
+        Для покупки билета необходимо пройти капчу...
         <ReCAPTCHA
           sitekey="6LeUfcUUAAAAAN9byFDlaNRZS31N3gSTUSptVvDz"
           onChange={this.onCaptcha}
         />
       </div>
-      <div className="flex justify-center container mb-4">
-        <table className="table-auto">
+      <div>
+        <table className="table table-striped">
           <thead>
             <tr>
-              <th className="px-4 py-2">Название</th>
-              <th className="px-4 py-2">Описание</th>
-              <th className="px-4 py-2">Цена (рубли)</th>
-              <th className="px-4 py-2">Купить</th>
+              <th>Название</th>
+              <th>Описание</th>
+              <th>Цена (рубли)</th>
+              <th>Купить</th>
             </tr>
           </thead>
           <tbody>
@@ -123,15 +119,14 @@ export default class ConContent extends React.Component {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-center">
+      <div className="text-center text-info">
         Если Вы не можете прийти на мероприятие, Вы можете пожертвовать любую удобную Вам сумму.
-      </div>
-      <div className="flex justify-center">
+        <br />
         Все, кто пожертвовал деньги, получат благодарность со сцены, а также на сайте и в группе мероприятия!
-      </div>
-      <div className="flex justify-center mb-20">
+        <br />
         <Donate />
-      </div> </> }
-    </>
+      </div>
+      </> }
+    </div>
   }
 }

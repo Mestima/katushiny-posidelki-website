@@ -6,8 +6,8 @@ export default class Btn extends React.Component {
     return(<>
       {this.props.needInvenBtn ?
         <div className="inline m-1">
-          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-            <Link to="/inventory">Инвентарь</Link>
+          <button className="btn btn-warning pixel">
+            <Link className="text-decoration-none text-white" to="/inventory">Инвентарь</Link>
           </button>
         </div>
       :<></>

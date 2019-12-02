@@ -20,7 +20,7 @@ export default class IndexPage extends React.Component {
             Статус Вашего аккаунта: {this.props.usergroup}
           </div>
           <br />
-          <div className="flex-auto text-black text-center px-4 py-2 m-2 pixel">
+          <div className="text-center">
             Данная страница еще в разработке :3 <br />
             Если возникли проблемы, пиши сюда: mestima@icloud.com
           {/* Убери pixel из div'a выше!
