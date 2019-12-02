@@ -144,13 +144,13 @@ class NavBar extends React.Component {
                           <div className="input-group-prepend">
                               <span className="input-group-text pixel">L</span>
                           </div>
-                          <input type="text" className="form-control" placeholder="login" />
+                          <input type="text" className="form-control pixel" id="login" placeholder="login" />
                       </div>
                       <div className="input-group m-1">
                           <div className="input-group-prepend">
                               <span className="input-group-text pixel">P</span>
                           </div>
-                          <input type="text" className="form-control" placeholder="password" />
+                          <input type="password" className="form-control pixel" id="password" placeholder="password" />
                       </div>
                       <div className="input-group">
                         <Buttons.signIn signIn={this.signIn} />
