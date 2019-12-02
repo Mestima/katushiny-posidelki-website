@@ -5,8 +5,10 @@ import Donate from '../donate/';
 import Buy from '../buttons/buy';
 import IsJson from '../isJson/';
 import LocalLoader from '../loader/loader';
+import Timepad from '../timepad/';
 
 const convention = "Twilight Time: Friendship is Knowledge";
+const useTimepad = true;
 
 export default class ConContent extends React.Component {
 
@@ -94,38 +96,63 @@ export default class ConContent extends React.Component {
       <div className="text-center display-3 font-weight-bold">
         Билеты
       </div>
-      <div className="text-center text-danger">
-        <h4>Ваш билет появится в инвентаре Вашего аккаунта</h4>
-      </div>
+      {useTimepad ?
+        <>
+
+        </> :
+        <>
+          <div className="text-center text-danger">
+            <h4>Ваш билет появится в инвентаре Вашего аккаунта</h4>
+          </div>
+          <div>
+            Для покупки билета необходимо пройти капчу...
+            <ReCAPTCHA
+              sitekey="6LeUfcUUAAAAAN9byFDlaNRZS31N3gSTUSptVvDz"
+              onChange={this.onCaptcha}
+            />
+          </div>
+        </>
+      }
       <div>
-        Для покупки билета необходимо пройти капчу...
-        <ReCAPTCHA
-          sitekey="6LeUfcUUAAAAAN9byFDlaNRZS31N3gSTUSptVvDz"
-          onChange={this.onCaptcha}
-        />
+        {useTimepad ?
+          <>
+            <div className="text-center text-danger">
+              <h4>При покупке билета укажите логин Вашего аккаунта на сайте</h4>
+              <h6>(это нужно для добавления билета в Ваш инвентарь, однако билет в ЛЮБОМ случае будет выслан Вам на email)</h6>
+            </div>
+            <Timepad />
+          </> :
+          <>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Название</th>
+                  <th>Описание</th>
+                  <th>Цена (рубли)</th>
+                  <th>Купить</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.createTable()}
+              </tbody>
+            </table>
+          </>
+        }
       </div>
-      <div>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Название</th>
-              <th>Описание</th>
-              <th>Цена (рубли)</th>
-              <th>Купить</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.createTable()}
-          </tbody>
-        </table>
-      </div>
-      <div className="text-center text-info">
-        Если Вы не можете прийти на мероприятие, Вы можете пожертвовать любую удобную Вам сумму.
-        <br />
-        Все, кто пожертвовал деньги, получат благодарность со сцены, а также на сайте и в группе мероприятия!
-        <br />
-        <Donate />
-      </div>
+      {useTimepad ?
+        <>
+          <div className="mb-5" />
+        </> :
+        <>
+          <div className="text-center text-info">
+            Если Вы не можете прийти на мероприятие, Вы можете пожертвовать любую удобную Вам сумму.
+            <br />
+            Все, кто пожертвовал деньги, получат благодарность со сцены, а также на сайте и в группе мероприятия!
+            <br />
+            <Donate />
+          </div>
+        </>
+      }
       </> }
     </div>
   }
