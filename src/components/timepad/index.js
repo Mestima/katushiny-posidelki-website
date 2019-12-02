@@ -1,12 +1,18 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 
 export default class Timepad extends React.Component {
+  componentDidMount() {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://timepad.ru/js/tpwf/loader/min/loader.js";
+    this.div.appendChild(script);
+  }
+
   render() {
-    return(<>
-      <Helmet>
-        <script type="text/javascript" async="async" defer="defer" charset="UTF-8" src="https://timepad.ru/js/tpwf/loader/min/loader.js" data-timepad-customized="52381" data-timepad-apidomain="timepad.ru" data-timepad-widget-v2="event_list3"></script>
-      </Helmet>
-    </>);
+    return(
+      <div className="Timepad" ref={el => (this.div = el)}>
+        <script type="text/javascript" async="async" defer="defer" charset="UTF-8" src="https://timepad.ru/js/tpwf/loader/min/loader.js" data-timepad-customized="52066" data-twf2s-event--id="1134398" data-timepad-widget-v2="event_register"></script>
+      </div>
+    );
   }
 }
