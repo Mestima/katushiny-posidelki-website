@@ -79,14 +79,14 @@ export default class RegContent extends React.Component {
           <div className="input-group-prepend">
             <span className="input-group-text" id="inputGroup-sizing-default">Пароль</span>
           </div>
-          <input type="text" className="form-control" id="password_1" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
+          <input type="password" className="form-control" id="password_1" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
         </div>
 
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text" id="inputGroup-sizing-default">Повторите пароль</span>
           </div>
-          <input type="text" className="form-control" id="password_2" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
+          <input type="password" className="form-control" id="password_2" aria-label="Default" aria-describedby="inputGroup-sizing-default" />
         </div>
 
         <div className="input-group mb-3">
