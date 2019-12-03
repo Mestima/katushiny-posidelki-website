@@ -6,6 +6,7 @@ import Buy from '../buttons/buy';
 import IsJson from '../isJson/';
 import LocalLoader from '../loader/loader';
 import Timepad from '../timepad/';
+import WarningAdm from '../admin_attention_warn/';
 
 const convention = "Twilight Time: Friendship is Knowledge";
 const useTimepad = true;
@@ -141,6 +142,7 @@ export default class ConContent extends React.Component {
       </div>
       {useTimepad ?
         <>
+          <WarningAdm />
           <div className="mb-5" />
         </> :
         <>
