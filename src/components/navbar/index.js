@@ -119,7 +119,7 @@ class NavBar extends React.Component {
     return(<div>
 
       <div className="container">
-          <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+          <nav className="navbar navbar-expand-sm bg-dark navbar-dark rounded">
           {/*
               <button className="navbar-toggler" type="button" data-toggle="collapse"
                           data-target="#collapse_Navbar">
