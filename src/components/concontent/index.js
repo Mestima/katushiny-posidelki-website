@@ -76,7 +76,7 @@ export default class ConContent extends React.Component {
     for (let k of Object.keys(this.state.result)) {
       let v = this.state.result[k];
       table.push(<div class='text-center'>
-        <div class='display-3 font-weight-bold'>{v['name']}</div>
+        <div><h1><b>{v['name']}</b></h1></div>
         <div><h3>{v['description']}</h3></div>
         <div>Дата начала мероприятия: {v['starts']}</div>
         <div>Дата окончания мероприятия: {v['ends']}</div>
