@@ -128,7 +128,7 @@ class NavBar extends React.Component {
           */}
 
               <div className="collapse navbar-collapse" id="collapse_Navbar">
-                  <span className="text-white pixel">Привет, Анон!</span>
+                  <span className="text-white pixel">Привет, {this.props.username}!</span>
               </div>
               {this.props.authed ?
                 <>
