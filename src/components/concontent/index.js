@@ -7,6 +7,7 @@ import IsJson from '../isJson/';
 import LocalLoader from '../loader/loader';
 import Timepad from '../timepad/';
 import WarningAdm from '../admin_attention_warn/';
+import Alert from '../alert/';
 
 const convention = "Twilight Time: Friendship is Knowledge";
 const useTimepad = true;
@@ -118,8 +119,12 @@ export default class ConContent extends React.Component {
         {useTimepad ?
           <>
             <div className="text-center text-danger">
-              <h4>При покупке билета укажите логин Вашего аккаунта на сайте</h4>
-              <h6>(это нужно для добавления билета в Ваш инвентарь, однако билет в ЛЮБОМ случае будет выслан Вам на email)</h6>
+              <Alert
+                state={true}
+                color='primary'
+                title='При покупке билета укажите логин Вашего аккаунта на сайте'
+                content='это нужно для добавления билета в Ваш инвентарь, однако билет в ЛЮБОМ случае будет выслан Вам на email'
+              />
             </div>
             <Timepad />
           </> :
