@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Change from '../components/buttons/change';
 import NavBar from '../components/navbar/';
+import Footer from '../components/footer/';
 import HeaderImg from '../components/headerimage/';
 
 const needInvenBtn = true;
@@ -60,6 +61,7 @@ export default class IndexPage extends React.Component {
             */}
           </div>
         </div>
+        <Footer />
       </>}
     </>)
   }

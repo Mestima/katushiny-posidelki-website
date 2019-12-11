@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import NavBar from '../components/navbar/';
+import Footer from '../components/footer/';
 import Change from '../components/buttons/change';
 
 const needMainPBtn = true;

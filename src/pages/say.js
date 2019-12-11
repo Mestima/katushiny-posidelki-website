@@ -1,6 +1,7 @@
 import React from 'react';
 import HeaderImg from '../components/headerimage/';
 import NavBar from '../components/navbar/';
+import Footer from '../components/footer/';
 
 const needInvenBtn = true;
 const needAdminBtn = true;
@@ -13,6 +14,7 @@ export default class SayPage extends React.Component {
       <div className="container text-center">
         <div className="display-4 pixel">{this.props.location.text ? this.props.location.text : "Ой, кажется ты попал сюда случайно..."}</div>
       </div>
+      <Footer />
     </>)
   }
 }
