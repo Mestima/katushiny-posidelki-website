@@ -19,6 +19,8 @@ class NavBar extends React.Component {
     }
   }
 
+  onAlertClose = () => this.setState({showAlert: false});
+
   enableLoader = (e) => {
     e.preventDefault();
     this.props.updateState({loading: true});
@@ -117,7 +119,6 @@ class NavBar extends React.Component {
 
   render() {
     return(<div>
-
       <div className="container">
           <nav className="navbar navbar-expand-sm bg-dark navbar-dark rounded">
           {/*
@@ -163,7 +164,6 @@ class NavBar extends React.Component {
               }
           </nav>
       </div>
-
     </div>)
   }
 }
