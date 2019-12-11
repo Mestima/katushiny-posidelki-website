@@ -60,7 +60,7 @@ export default function() {
     {/* Footer Links */}
     {/* Copyright */}
     <div className="footer-copyright text-center text-white py-3">
-      Copyright © {year} | Катюшины Посиделки | v1.2.0-evil_unicorn
+      Copyright © {year} | Катюшины Посиделки | v1.2.1-evil_unicorn
     </div>
     {/* Copyright */}
     </footer>
