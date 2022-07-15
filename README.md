@@ -1,4 +1,4 @@
-An old one website for Katushiny Posidelky project
+An old one website for Katushiny Posidelki project
 
 ## Available Scripts
 
